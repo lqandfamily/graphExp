@@ -76,6 +76,8 @@ int CreateGraphFromFile(char fileName[], Graph &G) {
         strncpy(strTemp, str, 2);
         if (strstr(strTemp, "//") != NULL)    //跳过注释行
             continue;
+        if (strstr(strTemp, "\n") != NULL)
+            continue;
         else                          //非注释行、非空行，跳出循环
             break;
     }
@@ -138,8 +140,8 @@ int CreateGraphFromFile(char fileName[], Graph &G) {
     elementType Nf, Ns;   //边或弧的2个相邻顶点
     while (fgets(str, 1000, pFile) != NULL) {
         strLTrim(str);     //删除字符串左边空格，这是一个自定义函数
-        if (str[0] == '\n')    //空行，继续读取下一行
-            continue;
+        if (str[0] == '\n' || str[0] == '\r')    //空行，继续读取下一行
+            continue;1
         strncpy(strTemp, str, 2);
         if (strstr(strTemp, "//") != NULL)  //注释行，跳过，继续读取下一行
             continue;
