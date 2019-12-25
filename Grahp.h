@@ -76,7 +76,7 @@ int CreateGraphFromFile(char fileName[], Graph &G) {
         strncpy(strTemp, str, 2);
         if (strstr(strTemp, "//") != NULL)    //跳过注释行
             continue;
-        if (strstr(strTemp, "\n") != NULL)
+        if (str[0] == '\n' || str[0] == '\r')       //跳过空行
             continue;
         else                          //非注释行、非空行，跳出循环
             break;
@@ -141,7 +141,7 @@ int CreateGraphFromFile(char fileName[], Graph &G) {
     while (fgets(str, 1000, pFile) != NULL) {
         strLTrim(str);     //删除字符串左边空格，这是一个自定义函数
         if (str[0] == '\n' || str[0] == '\r')    //空行，继续读取下一行
-            continue;1
+            continue;
         strncpy(strTemp, str, 2);
         if (strstr(strTemp, "//") != NULL)  //注释行，跳过，继续读取下一行
             continue;
